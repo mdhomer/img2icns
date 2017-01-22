@@ -6,6 +6,8 @@
 output=$2
 dir=$output'.iconset' # temp directory
 file=$1 # input file name
+savetemp=0 # save temporary .iconset folder
+if (($3 == 1)); then savetemp=1; fi
 
 sizes=(16 16 32 32 128 128 256 256 512)
 
@@ -31,7 +33,7 @@ then
     done
     cp $file $dir/icon_512x512@2x.png
     iconutil -c icns $dir
-    rm -R $dir
+    if (($savetemp == 0)); then rm -R $dir; fi
     echo ''
     echo 'Saved as:' $output'.icns'
 else
